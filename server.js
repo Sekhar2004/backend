@@ -10,8 +10,13 @@ const app = express();
 connectDB();
 
 // Middleware
-app.use(cors());
-app.use(express.json({ extended: false }));
+const corsOptions = {
+    origin: 'https://client-pink-chi.vercel.app', // Add your frontend URL here
+    methods: 'GET,POST,PUT,DELETE',
+    allowedHeaders: 'Content-Type,Authorization',
+  };
+  app.use(cors(corsOptions));
+  app.use(express.json({ extended: false }));
 
 // Define routes
 app.use('/api/auth', require('./routes/auth'));
